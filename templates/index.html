@@ -1,0 +1,189 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="/static/Screenshot 2023-12-03 191354.png" type="image/x-icon">
+</head>
+<body class="bg-[#081c10] opacity-75">
+    <nav class=" py-14 px-16">
+        <div class="container mx-auto flex justify-between items-center ">
+            
+            <a href="/home.html"
+                class="text-gray-300 text-3xl  font-semibold hover:text-[#ADBDAB] hover:scale-95">Image2code</a>
+
+            
+            <div class="flex space-x-4 px-4">
+                <a href="/home" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Home</a>
+                <a href="/" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Image2code</a>
+
+                <a href="/aboutus" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">About Us</a>
+                
+            </div>
+        </div>
+        <br>
+        <hr>
+    </nav>
+    <div class="py-14 px-16 container ">
+    <h1 class=" text-3xl font-bold py-4 px-4 text-white">Upload Image</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" class="py-4 font-semibold text-white"><br><br>
+        <label for="confidence" class="font-semibold text-white">Confidence:</label>  <input class="py-2 px-3 w-1/2 border border-[#081c10] rounded-lg shadow-sm text-center" type="number" name="confidence" step="0.01" min="0" max="1" value="0.5"><br><br>
+        <label for="overlap" class="font-semibold text-white">IOU Overlap:</label>
+         <input class="py-2 px-3 w-1/2 border border-[#081c10] rounded-lg shadow-sm text-center" type="number" name="overlap" step="0.01" min="0" max="1" value="0.3"><br><br>
+        <input class="py-2 bg-[#dde0df] rounded-full space-between tracking-tight px-8 hover:opacity-75" type="submit" value="Upload">
+    </form>
+</div>
+<footer class="bg-[#081c10] text-[white] opacity-50 bottom-0 w-full">
+    <div class="container mx-auto text-center">
+        
+        <p class="mb-2">Syed Nazeeruddin Yousuf | Mohammed Abdul Razzack | Ragella Manish | Sai Kiran</p>
+        
+        
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Upload Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="/static/layers.png" type="image/x-icon">
+    <style>
+        body {
+            
+            background-color: #081c10;
+            opacity: 0.75;
+        }
+
+        .navbar {
+            padding: 14px 16px;
+            background-color: #081c10;
+            border-bottom: 1px solid #ADBDAB;
+        }
+
+        .navbar a {
+            color: #ADBDAB;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .navbar a:hover {
+            color: #ffffff;
+            transform: scale(0.95);
+        }
+
+        .container {
+            padding: 14px 16px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+            /* text-align: center; */
+        }
+
+        #image-preview {
+            max-width: 100%;
+            max-height: 300px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            background-color: #081c10;
+            color: white;
+            opacity: 0.5;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class=" py-14 px-16">
+        <div class="container mx-auto flex justify-between items-center ">
+            <!-- Logo or Website Name -->
+            <a href="/home"
+                class="text-gray-300 text-3xl  font-semibold hover:text-[#ADBDAB] hover:scale-95">Image2code</a>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-4 px-4">
+                <a href="/home" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Home</a>
+                <a href="/" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Image2code</a>
+
+                <a href="/aboutus" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">About Us</a>
+                <!-- Add more links as needed -->
+            </div>
+        </div>
+        <br>
+        <hr>
+    </nav>
+<div class="flex flex-col md:flex-row">
+<div class="container">
+    <h1 class="text-3xl font-bold py-4 px-4 text-white">Upload Image</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" class="py-4 font-semibold text-white" onchange="handleFileSelect(this)"><br><br>
+        <label for="confidence" class="font-semibold text-white">Confidence:</label>
+        <input class="py-2 px-3 w-1/2 border border-[#081c10] rounded-lg shadow-sm text-center" type="number"
+               name="confidence" step="0.01" min="0" max="1" value="0.5"><br><br>
+        <label for="overlap" class="font-semibold text-white">IOU Overlap:</label>
+        <input class="py-2 px-3 w-1/2 border border-[#081c10] rounded-lg shadow-sm text-center" type="number"
+               name="overlap" step="0.01" min="0" max="1" value="0.3"><br><br>
+        <input class="py-2 bg-[#dde0df] rounded-full space-between tracking-tight px-8 hover:opacity-75"
+               type="submit" value="Upload">
+    </form>
+</div>
+    <div class="preview-container pr-28">
+        <img id="image-preview" src="#" alt="Image Preview" class="hidden">
+    </div>
+
+</div>
+
+<footer>
+    <div class="container mx-auto text-center">
+        <p class="mb-2">Syed Nazeeruddin Yousuf | Mohammed Abdul Razzack | Ragella Manish | Sai Kiran</p>
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function handleFileSelect(input) {
+        const preview = document.getElementById('image-preview');
+        const file = input.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.classList.add('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>
+

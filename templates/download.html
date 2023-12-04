@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download File</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-[#081c10] opacity-75 text-white"> 
+    <nav class=" py-14 px-16">
+        <div class="container mx-auto flex justify-between items-center ">
+            <!-- Logo or Website Name -->
+            <a href="/home"
+                class="text-gray-300 text-3xl  font-semibold hover:text-[#ADBDAB] hover:scale-95">Image2code</a>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-4 px-4">
+                <a href="/home" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Home</a>
+                <a href="/" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">Image2code</a>
+
+                <a href="/aboutus" class="text-gray-300 text-xl font-semibold hover:text-[#ADBDAB]">About Us</a>
+                <!-- Add more links as needed -->
+            </div>
+        </div>
+        <br>
+        <hr>
+    </nav>
+    <div class="container py-2 px-16">
+        <div>
+    <h1 class="text-3xl font-bold py-4 px-4">Download Processed File</h1>
+    <img style="height: 500px;width: 700px" src="{{ url_for('static', filename=image_filename) }}" alt="Predicted Image"><br><br>
+    <a href="/download/{{ html_filename }}" class="py-2 bg-[#dde0df] rounded-full space-between tracking-tight px-8 hover:opacity-50 text-black">Download HTML File</a></div>
+</html>

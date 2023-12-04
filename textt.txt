@@ -1,0 +1,68 @@
+with open('new_test.html', 'w') as f:
+    # Write the start of the HTML and CSS
+    f.write("""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .detected-object {
+            position: absolute;
+            border: 1px solid red;
+        }
+    """)
+    
+    # Write CSS for each object
+    for i, ob in enumerate(objects):
+        f.write(f"""
+        #{ob['class']}{i} {{
+            left: {int(ob['x_min'])}px;
+            top: {int(ob['y_min'])}px;
+            width: {int(ob['width'])}px;
+            height: {int(ob['height'])}px;
+        }}
+        """)
+    
+    # End of CSS and start of body
+    f.write("""
+    </style>
+</head>
+<body>
+    """)
+
+    # Write HTML elements for each object
+    for i, ob in enumerate(objects):
+        if ob['class'] == 'image':
+            f.write(f'<img id="{ob["class"]}{i}" class="detected-object" src="default.png" alt="Default Image">\n')
+        elif ob['class'] == 'text':
+            f.write(f'<div id="{ob["class"]}{i}" class="detected-object">Some random text</div>\n')
+        elif ob['class'] == 'button':
+            f.write(f'<button id="{ob["class"]}{i}" class="detected-object">Button</button>\n')
+        elif ob['class'] == 'header':
+            # style="background-color: #2196F3; padding: 15px 20px; overflow: hidden;">
+            f.write(f"""<div id="{ob["class"]}{i}" style = "background-color: #2196F3;" class="detected-object">
+                        <a href="#" style="float: left; color: #f2f2f2; text-decoration: none; font-size: 2.5rem; padding: 14px 16px;">Home</a>
+                        <a href="#" style="float: left; color: #f2f2f2; text-decoration: none; font-size: 2.5rem; padding: 14px 16px;">About</a>
+                        <a href="#" style="float: left; color: #f2f2f2; text-decoration: none; font-size: 2.5rem; padding: 14px 16px;">Contact</a>
+                    </div>
+                </header>\n""")
+        elif ob['class'] == 'footer':
+            f.write(f'<footer id="{ob["class"]}{i}" class="detected-object">Footer content</footer>\n')
+        elif ob['class'] == 'card':
+            f.write(f'<div id="{ob["class"]}{i}" class="detected-object"><img id="{ob["class"]}{i}" src="default.png" alt="Default Image"><h3 class="detected-object">Text for card</h3></div>\n')
+        elif ob['class'] == 'search_bar':
+            f.write(f"""
+            <div id="{ob["class"]}{i}" class="detected-object" >
+                <input id="{ob["class"]}{i} type="text" placeholder="Search">
+                <buttoni d="{ob["class"]}{i} >Search</button>
+            </div>
+            """)
+    
+    # End of HTML
+    f.write("""
+</body>
+</html>
+""")
